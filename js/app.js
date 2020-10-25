@@ -3,12 +3,16 @@ console.log('app.js loaded.');
 // -------------------
 // ACCOUNT LOGIN
 // Get a string.
-// Check if it exists at a source.
+// Check if it exists at a array.
 // CRUD.
 // Run next step.
 // -------------------
 
-// PREVIOUSLY STORED DATA
+//////////////////
+// Declarations //
+//////////////////
+
+// [Temp] Stored data
 const storedData = [
     {
         id: 1,
@@ -27,28 +31,34 @@ const storedData = [
 // ACCOUNT LOGIN
 // Get a string.
 
-// RETURN OBJECT OF KEYPAIR
-function findObjects(container, property, value) {
+
+///////////////
+// Functions //
+///////////////
+
+// Search array array for specified criteria and return matches
+// Future: adjust array to object and array
+function findObjects(array, property, value) {
 
     // Return all results, no criteria
     function returnAll() {
         console.log('Running returnAll().');
         // Go through preexisting stored data
-        for (let i = 0; i < container.length; i++) {
+        for (let i = 0; i < array.length; i++) {
             // Return containing objects for Property matches
-            console.log(container[i]);
+            console.log(array[i]);
         }
     }
 
-    // Return all results with matching Property
+    // Return all results matching Property
     function returnByProperty(property) {
         console.log('Running returnByProperty().');
         // Go through preexisting stored data
-        for (let i = 0; i < container.length; i++) {
+        for (let i = 0; i < array.length; i++) {
             // On every keypair
-            for (keypair in container[i]) {
+            for (keypair in array[i]) {
                 // Return containing objects for Property matches
-                (keypair === property) ? console.log(container[i]) : false;
+                (keypair === property) ? console.log(array[i]) : false;
             }
         }
     }
@@ -57,31 +67,38 @@ function findObjects(container, property, value) {
     function returnByKeypair(property, value) {
         console.log('Running returnByKeypair().');
         // Go through preexisting stored data
-        for (let i = 0; i < container.length; i++) {
+        for (let i = 0; i < array.length; i++) {
             // On every keypair
-            for (keypair in container[i]) {
+            for (keypair in array[i]) {
                 // Return containing objects for Property matches
-                ((keypair === property) && (container[i][keypair] === value)) ? console.log(container[i]) : false;
+                ((keypair === property) && (array[i][keypair] === value)) ? console.log(array[i]) : false;
             }
         }
     }
 
-    // Error checking
+    // Error and arguement handling
     if (!property && value) {
         console.log('ERROR: Property must be included when searching for a Value.');
     // Return all if no keypair value is declared
     } else if (!property && !value) {
-        console.log('This will output all results.');
+        console.log('Outputting all results.');
         returnAll();
     } else if (property && value) {
-        console.log('This will output all results matching Property and Value.');
+        console.log('Outputting all results matching Property and Value.');
         returnByKeypair(property, value);
     } else if (property && !value) {
-        console.log('This will output all results matching Property name.');
+        console.log('Outputting all results matching Property name.');
         returnByProperty(property);
     }
         
 }
+
+// CRUD.
+// Run next step.
+
+/////////////
+// Runtime //
+/////////////
 
 // Test functions
 console.log('TESTING: Full search.');
@@ -95,8 +112,3 @@ findObjects(storedData, '', 'second');
 
 console.log('TESTING: Missing Value.')
 findObjects(storedData, 'name', null);
-
-// Check if stored data pointer matches target string
-
-// CRUD.
-// Run next step.
