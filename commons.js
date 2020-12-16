@@ -1,4 +1,9 @@
-console.log('app.js loaded.');
+// Container to host all functions
+var methods = {};
+
+methods.test = function() {
+    console.log('common.js loaded successfully.');
+}
 
 // -------------------
 // ACCOUNT LOGIN
@@ -38,8 +43,7 @@ const storedData = [
 
 // Search array array for specified criteria and return matches
 // Future: adjust array to object and array
-function findObjects(array, property, value) {
-
+methods.findObjects = function(array, property, value) {
     // Return all results, no criteria
     function returnAll() {
         console.log('Running returnAll().');
@@ -102,13 +106,16 @@ function findObjects(array, property, value) {
 
 // Test functions
 console.log('TESTING: Full search.');
-findObjects(storedData, 'id', 3);
+methods.findObjects(storedData, 'id', 3);
 
 console.log('TESTING: Minimal search.');
-findObjects(storedData, '', null);
+methods.findObjects(storedData, '', null);
 
 console.log('TESTING: Missing Property.');
-findObjects(storedData, '', 'second');
+methods.findObjects(storedData, '', 'second');
 
 console.log('TESTING: Missing Value.')
-findObjects(storedData, 'name', null);
+methods.findObjects(storedData, 'name', null);
+
+// Export methods for other files to use
+module.exports = methods;
