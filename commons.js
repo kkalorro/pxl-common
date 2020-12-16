@@ -1,8 +1,11 @@
+// Version
+const version = '0.0.0.1';
+
 // Container to host all functions
-var methods = {};
+const methods = {};
 
 methods.test = function() {
-    console.log('common.js loaded successfully.');
+    console.log(`common.js loaded successfully. Version: ${version}`);
 }
 
 // -------------------
