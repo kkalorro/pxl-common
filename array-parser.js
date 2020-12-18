@@ -48,7 +48,7 @@ methods.findValueByProperty = function(array, property) {
     for (let i = 0; i < array.length; i++) {
         // Go through each keypair in array and return object containing strings matching Property
         for (keypair in array[i]) {
-            if (keypair === property) return array[i].property;
+            if (keypair === property) return array[i][property];
         }
     }
 }
