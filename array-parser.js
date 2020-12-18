@@ -1,7 +1,7 @@
-////////////////////////////////////////
-// NOTES                              //
-// Need a function that reads objects //
-////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+// NOTES                                                   //
+// Need to make this return more than just the first match //
+/////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
 // PURPOSE                                                                    //
@@ -14,7 +14,7 @@
 //////////////////
 
 // Version
-const version = '0.0.3';
+const version = '0.0.4';
 
 // Container to host all functions
 const methods = {};
@@ -27,12 +27,12 @@ const methods = {};
 methods.test = () => console.log(`common.js loaded successfully. Version: ${version}`);
 
 // Search an array by no given criteria and return all matches
-methods.matchesAny = function(array) {
+methods.findItemAny = function(array) {
     for (i in array) return array[i];
 }
 
-// Search an array by a specific Property and return all matches
-methods.matchesProperty = function(array, property) {
+// Search an array by a specific Property and first match
+methods.findItemByProperty = function(array, property) {
     // Go through array
     for (let i = 0; i < array.length; i++) {
         // Go through each keypair in array and return object containing strings matching Property
@@ -42,8 +42,19 @@ methods.matchesProperty = function(array, property) {
     }
 }
 
-// Search an array by a specific Value and return all matches
-methods.matchesValue = function(array, value) {
+// Search an array by a specific Property and return first matching value
+methods.findValueByProperty = function(array, property) {
+    // Go through array
+    for (let i = 0; i < array.length; i++) {
+        // Go through each keypair in array and return object containing strings matching Property
+        for (keypair in array[i]) {
+            if (keypair === property) return array[i].property;
+        }
+    }
+}
+
+// Search an array by a specific Value and return first match
+methods.findItemByValue = function(array, value) {
     // Go through array
     for (let i = 0; i < array.length; i++) {
         // Go through each keypair in array and return object containing strings matching Property
@@ -53,8 +64,8 @@ methods.matchesValue = function(array, value) {
     }
 }
 
-// Search an array by a specific keypair and return all matches
-methods.matchesKeypair = function(array, property, value) {
+// Search an array by a specific keypair and return first match
+methods.findItemByKeypair = function(array, property, value) {
     // Go through preexisting stored data
     for (let i = 0; i < array.length; i++) {
         // Go through each keypair in array and return object containing strings matching Property and Value
@@ -67,41 +78,6 @@ methods.matchesKeypair = function(array, property, value) {
 /////////////
 // RUNTIME //
 /////////////
-
-/////////////
-// TESTING //
-/////////////
-
-// const storedData = [
-//     {
-//         id: 1,
-//         name: 'AAA'
-//     },
-//     {
-//         id: 2,
-//         name: 'BBB'
-//     },
-//     {
-//         id: 3,
-//         test: 'AAA'
-//     },
-//     {
-//         id: 4,
-//         name: 'DDD'
-//     }
-// ];
-
-// console.log('TESTING: Search by no criteria.');
-// console.log(methods.matchesAny(storedData));
-
-// console.log('TESTING: Search by Property.')
-// console.log(methods.matchesProperty(storedData, 'test'));
-
-// console.log('TESTING: Search by Value.');
-// console.log(methods.matchesValue(storedData, 4));
-
-// console.log('TESTING: Search by Property and Value.');
-// console.log(methods.matchesKeypair(storedData, 'name', 'BBB'));
 
 // Export methods for other files to use
 module.exports = methods;
