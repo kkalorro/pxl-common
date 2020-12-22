@@ -14,7 +14,7 @@
 //////////////////
 
 // Version
-const version = '0.0.4';
+const version = '0.0.5';
 
 // Container to host all functions
 const methods = {};
@@ -42,17 +42,6 @@ methods.findItemByProperty = function(array, property) {
     }
 }
 
-// Search an array by a specific Property and return first matching value
-methods.findValueByProperty = function(array, property) {
-    // Go through array
-    for (let i = 0; i < array.length; i++) {
-        // Go through each keypair in array and return object containing strings matching Property
-        for (keypair in array[i]) {
-            if (keypair === property) return array[i][property];
-        }
-    }
-}
-
 // Search an array by a specific Value and return first match
 methods.findItemByValue = function(array, value) {
     // Go through array
@@ -71,6 +60,28 @@ methods.findItemByKeypair = function(array, property, value) {
         // Go through each keypair in array and return object containing strings matching Property and Value
         for (keypair in array[i]) {
             if ((keypair === property) && (array[i][keypair] === value)) return array[i];
+        }
+    }
+}
+
+// Search an array by a specific item and return first matching property
+methods.findPropertyByItem = function(item) {
+    return Object.keys(item);
+}
+
+// Search an array by a specific item and return first matching value
+methods.findValueByItem = function(item) {
+    const property = methods.findPropertyByItem(item);
+    return item[property];
+}
+
+// Search an array by a specific Property and return first matching value
+methods.findValueByProperty = function(array, property) {
+    // Go through array
+    for (let i = 0; i < array.length; i++) {
+        // Go through each keypair in array and return object containing strings matching Property
+        for (keypair in array[i]) {
+            if (keypair === property) return array[i][property];
         }
     }
 }
